@@ -22,3 +22,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    @staticmethod
+    def get_all_products():
+        return Product.objects.all()
