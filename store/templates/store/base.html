@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+  <body>
+    <!-- navbar started -->
+    <div class="navbar__div">
+      <h1>Navbar</h1>
+    </div>
+    <!-- navbar ends -->
+    <hr />
+    <!-- content started -->
+    <div class="blocl__div">{% block content %}{% endblock content %}</div>
+    <!-- content ends -->
+    <hr />
+    <!-- footer started -->
+    <div class="footer__div">
+      <h1>Footer</h1>
+    </div>
+    <!-- footer ends -->
+  </body>
+</html>
