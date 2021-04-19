@@ -14,13 +14,13 @@
     <div class="col-lg-2">
       <div class="list-group">
         {% for category in categories %}
-          <a href="#" class="list-group-item list-group-item-action">{{category}}</a>
+          <a href="#" value="{{category.id}}" class="list-group-item list-group-item-action">{{category}}</a>
         {% endfor %}
       </div>
     </div>
 
   <!-- products -->
-  <div class="container-fluid col-lg-10">
+<div class="container-fluid col-lg-10">
   <div class="row mx-auto">
     {% for product in products %}
       <div class="card mx-auto mb-3" style="width: 18rem;">
