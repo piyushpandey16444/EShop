@@ -3,17 +3,18 @@ from .models import Product, Category
 from django.http import JsonResponse
 from django.core import serializers
 from .serializers import ProductSerializer, CategorySerializer
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def home_view(request):
     if request.method == "GET" and request.is_ajax():
-        json_obj = request.GET.get("category_id", None)
-        if json_obj is not None:
-            product_objs = get_list_or_404(Product, category=json_obj)
-            print("product_objs: ", product_objs)
-            serializer = ProductSerializer(product_objs)
-            print("serializer : ", serializer.data)
-            return JsonResponse(data=serializer.data, safe=False)
+        json_category_id = request.GET.get("category_id", None)
+        if json_category_id is not None:
+            req_obj = Product.objects.filter(
+                category=json_category_id).values()
+            product_objs = json.dumps(list(req_obj), cls=DjangoJSONEncoder)
+            return JsonResponse(data=product_objs, safe=False)
     else:
         product_objs = Product.get_all_products()
         category_objs = Category.get_all_categories()
