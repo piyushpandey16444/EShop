@@ -8,21 +8,37 @@
 <a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
 <br>
 <br>
-<div class="container-fluid">
+
+<div class="row">
+
+  <!-- filter -->
+    <div class="col-lg-3 border border-info">
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">Active item</a>
+        <a href="#" class="list-group-item list-group-item-action">Item</a>
+        <a href="#" class="list-group-item list-group-item-action disabled">Disabled item</a>
+      </div>
+    </div>
+
+  <!-- products -->
+  <div class="container-fluid col-lg-9">
   <div class="row mx-auto">
     {% for product in products %}
       <div class="card mx-auto mb-3" style="width: 18rem;">
-        <img src="{{product.image.url}}" class="card-img-top" alt="...">
+        <img src="{{product.image.url}}" class="card-img-top" alt="..." style="width: 100%; height: 20rem;">
         <div class="card-body">
           <h5 class="card-title">{{product.name}}</h5>
-          <p class="card-text"><b>{{product.price}}</b></p>
-          <p class="card-text">{{product.description}}</p>
-          <a href="#" class="btn btn-primary">Add to Cart</a>
+          <p class="card-text" style="width: 100%; height: 4rem;">{{product.price}} <br> {{product.description}} </p>
         </div>
+        <a href="#" class="btn btn-outline-secondary btn-lg">Add to Cart</a>
       </div>
     {% endfor %}
   </div>
 </div>
+
+</div>
+
+
 
 
 {% endblock content %}
