@@ -1,5 +1,6 @@
 $(document).ready(() => {
-    $(".list__filter").click(function() {
-        alert(this.id);
+    $(".list__filter").click(function(e) {
+        console.log(this.id);
+        e.preventDefault();
     });
 });
