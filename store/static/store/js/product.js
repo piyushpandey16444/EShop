@@ -1,9 +1,9 @@
 $(document).ready(() => {
     $(".list__filter").click(function(e) {
         e.preventDefault();
-        output = "";
         const categoryId = this.id;
         console.log("data found: making ajax call !", categoryId);
+        var output = "";
 
         // making ajax call
         $.ajax({
@@ -18,12 +18,13 @@ $(document).ready(() => {
                 console.log(allUseRecords);
                 for (record in allUseRecords) {
                     output +=
-                        "<div class='product__display container-fluid col-lg-10' >" +
-                        "<div class='row mx-auto'>" +
-                        "<div class='card mx-auto mb-3' style ='width: 18rem;'>" +
-                        "<img src =" +
+                        "<div class='product__display col-lg-10 p-0 m-0 border border-info to_remove container-fluid p-0 m-0 border border-danger'>" +
+                        "<div class='row'>" +
+                        "<div class='card mb-3' style ='width: 18rem;'>" +
+                        "<img src=" +
+                        "http://localhost:8000/images/" +
                         allUseRecords[record]["image"] +
-                        "class='card-img-top' alt='...' style='width: 100%; height: 20rem;'>" +
+                        " class='card-img-top' alt='...' style='width: 100%; height: 20rem;'>" +
                         "<div class='card-body'>" +
                         "<h5 class='card-title'>" +
                         allUseRecords[record]["name"] +
@@ -35,7 +36,7 @@ $(document).ready(() => {
                         "Add to Cart" +
                         "</a></div></div></div>";
                 }
-                $(".product__display").replaceWith(output);
+                $(".to_remove").replaceWith(output);
             },
         });
     });
