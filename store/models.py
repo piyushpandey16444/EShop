@@ -9,6 +9,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def get_all_categories():
+        return Category.objects.all()
+
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -26,3 +30,10 @@ class Product(models.Model):
     @staticmethod
     def get_all_products():
         return Product.objects.all()
+
+    @staticmethod
+    def get_product_by_category(category_id=None):
+        if category_id:
+            return Product.objects.filter(category=category_id)
+        else:
+            return Product.objects.all()
