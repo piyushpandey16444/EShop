@@ -7,38 +7,22 @@
 <br>
 <a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
 <br>
-
-<div class="row container-fluid">
-    <div class="col-md">
-        <div class="card card-body">
-            <h5>Products</h5>
+<br>
+<div class="container-fluid">
+  <div class="row mx-auto">
+    {% for product in products %}
+      <div class="card mx-auto mb-3" style="width: 18rem;">
+        <img src="{{product.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text"><b>{{product.price}}</b></p>
+          <p class="card-text">{{product.description}}</p>
+          <a href="#" class="btn btn-primary">Add to Cart</a>
         </div>
-        <div class="card card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                <caption>List of products</caption>
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Product</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                        </tr>
-                    </thead>
-                    {% for product in products %}
-                        <tr>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.price }}</td>
-                            <td>{{ product.category }}</td>
-                            <td>{{ product.description }}</td>
-                            <td>{{ product.image.url }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </div>
+      </div>
+    {% endfor %}
+  </div>
 </div>
+
 
 {% endblock content %}
