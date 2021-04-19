@@ -16,7 +16,8 @@ $(document).ready(() => {
             success: function(response) {
                 const allUseRecords = response;
                 for (record in allUseRecords) {
-                    output += "<h1>" + response.model + "</h1>";
+                    console.log(record);
+                    output += "<h1>" + record + "</h1>";
                 }
 
                 $(".product__display").html(output);
