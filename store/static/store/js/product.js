@@ -1,7 +1,11 @@
 $(document).ready(() => {
     $(".list__filter").click(function(e) {
         e.preventDefault();
+        output = "";
         const categoryId = this.id;
+        console.log("data found: making ajax call !", categoryId);
+
+        // making ajax call
         $.ajax({
             type: "get",
             url: "/",
@@ -10,10 +14,12 @@ $(document).ready(() => {
             },
             dataType: "json",
             success: function(response) {
-                console.log("response is : ", response);
-                $(".product__display").replaceWith(
-                    "<h1>Here is the required data !" + response + " </h1>"
-                );
+                const allUseRecords = response;
+                for (record in allUseRecords) {
+                    output += "<h1>" + response.model + "</h1>";
+                }
+
+                $(".product__display").html(output);
             },
         });
     });
