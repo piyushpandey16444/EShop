@@ -1,23 +1,29 @@
-$(document).ready(() => {
-    document;
-    $("#filter__l2h").click(function(e) {
-        e.preventDefault();
-        // low to high clicked check for category
-        const obtaniedURL = window.location.href;
-        const obtaniedCategory = obtaniedURL.split("?category_name=")[0];
-        console.log(obtaniedCategory);
-        // making ajax call
-        // $.ajax({
-        //     type: "GET",
-        //     url: "/",
-        //     data: "data",
-        //     dataType: "dataType",
-        //     success: function(response) {
-
-        //     }
-        // });
-    });
-});
+// $(document).ready(() => {
+//     document;
+//     $("#filter__l2h").click(function(e) {
+//         e.preventDefault();
+//         // low to high clicked check for category
+//         const obtaniedURL = window.location.href;
+//         const obtaniedCategory = obtaniedURL.split("?category_name=")[1];
+//         console.log(obtaniedCategory);
+//         if (obtaniedCategory === undefined) {
+//             // code for no category
+//             const json_dt = { category: null, price_order: "l2h" };
+//             $.ajax({
+//                 type: "GET",
+//                 url: "/",
+//                 data: json_dt,
+//                 dataType: "json",
+//                 success: function(response) {
+//                     console.log(response);
+//                 },
+//             });
+//         } else {
+//             // code for category
+//             alert("yes categ");
+//         }
+//     });
+// });
 // $(document).ready(() => {
 //     $(".list__filter").click(function(e) {
 //         e.preventDefault();
