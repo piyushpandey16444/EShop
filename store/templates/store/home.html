@@ -9,23 +9,29 @@
 <br>
 
 <div class="row m-3">
-
-  <!-- filter -->
+  
     <div class="col-lg-2">
-      <div class="list-group">
+      <!-- filter by category -->
+      <div class="list-group"><strong>Filter by Category</strong>
         <a href="/" class="list-group-item list-group-item-action">All Products</a>
         {% for category in categories %}
           <a href="/?category_name={{ category.name }}" class="list-group-item list-group-item-action">{{category}}</a>
         {% endfor %}
       </div>
+      
+      <!-- filter by price -->
+      <div class="list-group mt-5"><strong>Filter by price</strong>
+        <a href="/?price=l2h" class="mt-2 list-group-item list-group-item-action">Low To High</a>
+        <a href="/?price=h2l" class="list-group-item list-group-item-action">High To Low</a>
+      </div>
     </div>
 
   <!-- products -->
-  <div class="product__display col-lg-10 p-0 m-0 border border-info">
-    <div class="to_remove container-fluid p-0 m-0 border border-danger">
+  <div class="product__display col-lg-10 p-0 m-0">
+    <div class="to_remove container-fluid p-0 m-0">
       <div class="row mx-auto">
         {% for product in products %}
-          <div class="card mx-auto mb-3" style="width: 18rem;">
+          <div class="card shadow p-3 mb-5 bg-white rounded mx-auto mb-3" style="width: 18rem;">
             <img src="{{product.image.url}}" class="card-img-top" alt="..." style="width: 100%; height: 20rem;">
             <div class="card-body">
               <h5 class="card-title">{{product.name}}</h5>
