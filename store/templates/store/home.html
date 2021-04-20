@@ -4,25 +4,31 @@
  Home Page 
 {% endblock title %} 
 {% block content %}
+
 <br>
-<a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
-<br>
+
+<div class="row">
+  <div class="col-lg-2">
+    <a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
+  </div>
+
+  <div class="col-lg-7 d-flex justify-content-around">
+    <!-- filter by category -->
+    <a href="/" class="btn btn-info">All Products</a>
+    {% for category in categories %}
+      <a href="/?category_name={{ category.name }}" class="btn btn-info">{{category}}</a>
+    {% endfor %}
+  </div>
+
+</div>
 
 <div class="row m-3">
   
     <div class="col-lg-2">
-      <!-- filter by category -->
-      <div class="list-group"><strong>Filter by Category</strong>
-        <a href="/" class="list-group-item list-group-item-action">All Products</a>
-        {% for category in categories %}
-          <a href="/?category_name={{ category.name }}" class="list-group-item list-group-item-action">{{category}}</a>
-        {% endfor %}
-      </div>
-      
       <!-- filter by price -->
-      <div class="list-group mt-5"><strong>Filter by price</strong>
-        <a href="/?price=l2h" class="mt-2 list-group-item list-group-item-action">Low To High</a>
-        <a href="/?price=h2l" class="list-group-item list-group-item-action">High To Low</a>
+      <div class="list-group"><strong>Filter by price</strong>
+        <a id="filter__l2h" href="/?price=l2h" class="mt-2 list-group-item list-group-item-action">Low To High</a>
+        <a id="filter__h2l" href="/?price=h2l" class="list-group-item list-group-item-action">High To Low</a>
       </div>
     </div>
 
