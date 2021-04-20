@@ -4,7 +4,7 @@ $(document).ready(() => {
         e.preventDefault();
         // low to high clicked check for category
         const obtaniedURL = window.location.href;
-        const obtaniedCategory = obtaniedURL.split("?category_name=");
+        const obtaniedCategory = obtaniedURL.split("?category_name=")[0];
         console.log(obtaniedCategory);
         // making ajax call
         // $.ajax({
