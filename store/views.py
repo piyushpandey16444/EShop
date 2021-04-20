@@ -8,16 +8,12 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 
 def home_view(request):
-    if request.method == "GET" and request.is_ajax():
-        json_category_id = request.GET.get("category_id", None)
-        if json_category_id is not None:
-            req_obj = Product.objects.filter(
-                category=json_category_id).values()
-            product_objs = json.dumps(list(req_obj), cls=DjangoJSONEncoder)
-            return JsonResponse(data=product_objs, safe=False)
-    else:
+    if request.method == "GET":
         product_objs = Product.get_all_products()
         category_objs = Category.get_all_categories()
+        get_category = request.GET.get('category_id', None)
+        if get_category is not None:
+            
         context = {
             'products': product_objs,
             'categories': category_objs,
