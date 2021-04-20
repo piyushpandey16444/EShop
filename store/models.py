@@ -28,12 +28,8 @@ class Product(models.Model):
         return self.name
 
     @staticmethod
-    def get_all_products():
-        return Product.objects.all()
-
-    @staticmethod
-    def get_product_by_category(category_id=None):
-        if category_id:
-            return Product.objects.filter(category=category_id)
+    def get_product_by_category(category_name=None):
+        if category_name:
+            return Product.objects.filter(category__name=category_name)
         else:
             return Product.objects.all()
