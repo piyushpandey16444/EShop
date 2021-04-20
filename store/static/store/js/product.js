@@ -4,7 +4,7 @@ $(document).ready(() => {
         e.preventDefault();
         // low to high clicked check for category
         const obtaniedURL = window.location.href;
-
+        dsfs;
         // making ajax call
         // $.ajax({
         //     type: "GET",
