@@ -9,11 +9,13 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 def home_view(request):
     if request.method == "GET":
-        product_objs = Product.get_all_products()
         category_objs = Category.get_all_categories()
         get_category = request.GET.get('category_id', None)
         if get_category is not None:
-            
+            product_objs = Product.get_product_by_category(
+                category_id=get_category)
+        else:
+            product_objs = Product.get_all_products()
         context = {
             'products': product_objs,
             'categories': category_objs,
