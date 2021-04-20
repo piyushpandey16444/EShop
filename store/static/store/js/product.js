@@ -1,3 +1,23 @@
+$(document).ready(() => {
+    document;
+    $("#filter__l2h").click(function(e) {
+        e.preventDefault();
+        // low to high clicked check for category
+        const obtaniedURL = window.location.href;
+
+
+        // making ajax call
+        // $.ajax({
+        //     type: "GET",
+        //     url: "/",
+        //     data: "data",
+        //     dataType: "dataType",
+        //     success: function(response) {
+
+        //     }
+        // });
+    });
+});
 // $(document).ready(() => {
 //     $(".list__filter").click(function(e) {
 //         e.preventDefault();
