@@ -9,7 +9,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 def compute_order(get_category=None, get_filter=None):
     if get_filter == 'l2h':
-        print(get_category, get_filter)
         product_objs = Product.get_product_by_category(
             category_name=get_category).order_by('price')
     else:
