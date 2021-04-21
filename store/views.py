@@ -19,8 +19,10 @@ def compute_order(get_category=None, get_filter=None):
 
 def home_view(request):
     if request.method == "GET" and request.is_ajax():
+        get_category = request.GET.get('category_name', None)
+        get_filter = request.GET.get('get_filter', None)
         product_objs = compute_order(
-            get_category=None, get_filter=request.GET.get('get_filter'))
+            get_category=get_category, get_filter=get_filter)
         return JsonResponse(data={'response': list(product_objs.values())}, safe=False)
 
     elif request.method == "GET":
