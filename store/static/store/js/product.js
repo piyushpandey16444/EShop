@@ -16,9 +16,10 @@ $(document).ready(() => {
                 const allUseRecords = response;
                 console.log("response is: ", allUseRecords);
                 for (record in allUseRecords) {
-                    // output +=
+                    output +=
                 }
-                $(".to_remove").replaceWith(output);
+
+                $(".product__body").html(output);
             },
         });
     });
