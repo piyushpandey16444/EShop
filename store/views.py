@@ -18,7 +18,9 @@ def compute_order(get_category=None, get_price=None):
 
 
 def home_view(request):
-    if request.method == "GET":
+    if request.method == "GET" and request.is_ajax():
+        pass
+    elif request.method == "GET":
         category_objs = Category.get_all_categories()
 
         get_category = request.GET.get('category_name', None)
