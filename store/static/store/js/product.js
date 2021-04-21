@@ -24,6 +24,7 @@
 //         }
 //     });
 // });
+
 // $(document).ready(() => {
 //     $(".list__filter").click(function(e) {
 //         e.preventDefault();
