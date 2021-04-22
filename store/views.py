@@ -27,19 +27,14 @@ def home_view(request):
 
     elif request.method == "GET":
         category_objs = Category.get_all_categories()
-
         get_category = request.GET.get('category_name', None)
         get_price = request.GET.get('price', None)
-        if get_category is not None:
+        if get_category:
             product_objs = Product.get_product_by_category(
                 category_name=get_category)
-        elif get_price is not None:
-            if get_price == 'l2h':
-                product_objs = Product.get_product_by_category(
-                    category_name=None).order_by('price')
-            else:
-                product_objs = Product.get_product_by_category(
-                    category_name=None).order_by('-price')
+        elif get_price:
+            product_objs = compute_order(
+                get_category=get_category, get_filter=get_price)
         else:
             product_objs = Product.get_product_by_category(
                 category_name=None)
