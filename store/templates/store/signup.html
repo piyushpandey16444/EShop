@@ -16,7 +16,9 @@
                 
                 <form>
                     <label class="ap_customer_uname_label" for="ap_customer_uname" class="p-0 m-0" style="font-size: 14px;">Your Username</label>
-                    <input class="ap_customer_uname" type="text" maxlength="50" required id="ap_customer_uname"/>
+                    <input class="ap_customer_uname" tabindex="1" autocomplete="username" type="text" maxlength="50" required id="ap_customer_uname"/>
+                    
+                    {% comment %} <label class="ap_customer_email_label" for="ap_customer_uname" class="p-0 m-0" style="font-size: 14px;">Email (optional)</label> {% endcomment %}
                 </form>
 
             </div>

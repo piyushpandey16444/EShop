@@ -17,3 +17,9 @@
     margin-top: 4px;
     border-radius: 5px;
 }
+
+.ap_customer_uname:focus {
+    box-shadow: 0px 0px 5px 2px #f09f26;
+    outline-color: #c97800;
+    outline-width: thin;
+}
