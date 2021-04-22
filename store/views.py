@@ -44,3 +44,11 @@ def home_view(request):
             'categories': category_objs,
         }
         return render(request, 'store/home.html', context)
+
+
+def signup_view(request):
+    return render(request, 'store/signup.html')
+
+
+def login_view(request):
+    return render(request, 'store/login.html')
