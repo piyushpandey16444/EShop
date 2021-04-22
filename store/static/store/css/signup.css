@@ -3,3 +3,17 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.ap_customer_uname_label {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+.ap_customer_uname {
+    height: 30px;
+    width: 100%;
+    margin-top: 4px;
+    border-radius: 5px;
+}
