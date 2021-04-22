@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+
+{% block title %} 
+    EShop | SignUp
+{% endblock title %}
+
+{% block content %}
+    <div class="d-flex flex-column mx-auto border border-danger">
+        <div class="card-title mx-auto m-3 pl-2 pr-2 pt-1 bg-danger rounded text-white">
+            <h4 style="font-size: 16px;">Welcome To EShop</h4>
+        </div>
+
+        <div class="card mx-auto" style="width: 25rem;">
+            <div class="card-body">
+                <h3 class="card-title">Create Account</h3>
+                
+                <form>
+                    <p class="font-weight-bold p-0 m-0" style="font-size: 14px;">Your Username</p>
+                    <input class="ap_customer_uname" type="text" maxlength="50" required id="ap_customer_uname"/>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
