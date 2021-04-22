@@ -8,17 +8,23 @@
 <br>
 
 <div class="row ml-2">
-  <div class="col-lg-2">
-    <a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
+  <div class="col-lg-2 border border-danger">
+
+    div.wrapper>div#sidebar
+
   </div>
 
-  <div class="col-lg-7 d-flex justify-content-around">
+  <div class="col-lg-10">
+    <a href="{% url 'home' %}" class="btn active btn-info">Go Back</a>
+  </div>
+
+  {% comment %} <div class="col-lg-7 d-flex justify-content-around">
     <!-- filter by category -->
     <a href="/" class="btn btn-info">All Products</a>
     {% for category in categories %}
       <a href="/?category_name={{ category.name }}" class="btn btn-info">{{category}}</a>
     {% endfor %}
-  </div>
+  </div> {% endcomment %}
 
 </div>
 
