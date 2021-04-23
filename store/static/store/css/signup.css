@@ -125,3 +125,13 @@
 .a-button-input:hover {
     background-color: #f8c271;
 }
+
+.gradient__hr {
+    display: block;
+    border: none;
+    color: rgb(107, 99, 99);
+    height: 2px;
+    background: rgb(73, 71, 71);
+    background: -webkit-gradient( radial, 50% 50%, 0, 50% 50%, 700, from(rgb(150, 147, 147)), to(#fff));
+    margin-top: 30px;
+}
