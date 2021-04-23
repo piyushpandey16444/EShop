@@ -18,7 +18,18 @@
                     <label class="ap_customer_uname_label" for="ap_customer_uname" class="p-0 m-0" style="font-size: 14px;">Your Username</label>
                     <input class="ap_customer_uname" tabindex="1" autocomplete="username" type="text" maxlength="50" required id="ap_customer_uname"/>
                     
-                    {% comment %} <label class="ap_customer_email_label" for="ap_customer_uname" class="p-0 m-0" style="font-size: 14px;">Email (optional)</label> {% endcomment %}
+                    <label class="ap_email_label" for="ap_email" style="font-size: 14px;">Email</label>
+                    <input class="ap_email" tabindex="2" autocomplete="email" type="email" maxlength="64" required id="ap_email"/>
+                    
+                    <label class="ap_password1_label" for="ap_password1" style="font-size: 14px;">Password</label>
+                    <input class="ap_password1" tabindex="3" autocomplete="off" type="password" maxlength="1024" required id="ap_password1" placeholder="At least 8 characters"/>
+                    
+                    <label class="ap_password2_label" for="ap_password2" style="font-size: 14px;">Confirm Password</label>
+                    <input class="ap_password2" tabindex="4" autocomplete="off" type="password" maxlength="1024" required id="ap_password2"/>
+
+                    <div class="alert__content border border-danger">
+
+                    </div>
                 </form>
 
             </div>
