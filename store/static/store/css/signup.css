@@ -105,3 +105,9 @@
     height: 15px;
     width: 100%;
 }
+
+.alert__content {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
