@@ -1,0 +1,51 @@
+{% extends 'store/base.html' %}
+
+{% block title %} 
+    EShop | Login
+{% endblock title %}
+
+{% block content %}
+    <div class="d-flex flex-column mx-auto">
+        <div class="card-title mx-auto m-3 pl-2 pr-2 pt-1 bg-danger rounded text-white">
+            <h4 style="font-size: 16px;">Welcome To EShop</h4>
+        </div>
+
+        <div class="card mx-auto" style="width: 25rem;">
+            <div class="card-body">
+                <h3 class="card-title">Create Account</h3>
+                
+                <form>
+                    <label class="ap_customer_uname_label" for="ap_customer_uname" class="p-0 m-0" style="font-size: 14px;">Email</label>
+                    <input class="ap_customer_uname" tabindex="1" autocomplete="username" type="text" maxlength="50" required id="ap_customer_uname"/>
+                    
+                    <label class="ap_password1_label" for="ap_password1" style="font-size: 14px;">Password</label>
+                    <input class="ap_password1" tabindex="2" autocomplete="off" type="password" maxlength="1024" required id="ap_password1" placeholder="At least 8 characters"/>
+                    
+                    <p class="alert__content">
+                        By continuing, you agree to Eshop's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
+                    </p>
+
+                    <input type="submit" id="continue" tabindex="3" class="a-button-input" value="Continue">
+                </form> 
+
+                <hr class="gradient__card mx-auto">
+
+                <div class="signup__text">New to Eshop?
+                    <a href="{% url 'signup' %}" class="singup__link">Sign Up</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr class="gradient__hr mx-auto">
+
+    <div class="footer__div_login p-0 m-0 d-flex">
+        <div class="footer__link d-flex mx-auto">
+            <a href="#" class="condition__link mx-auto">Condition of use</a>
+            <a href="#" class="privacy__link mx-auto">Privacy Note</a>
+            <a href="#" class="help__link mx-auto">Help</a>
+        </div>
+    </div>
+
+{% endblock content %}
