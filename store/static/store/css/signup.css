@@ -104,9 +104,6 @@
     margin-top: 8px;
     height: 15px;
     width: 100%;
-}
-
-.alert__content {
     margin-top: 20px;
     font-size: 14px;
     font-weight: 500;
@@ -133,5 +130,29 @@
     height: 2px;
     background: rgb(73, 71, 71);
     background: -webkit-gradient( radial, 50% 50%, 0, 50% 50%, 700, from(rgb(150, 147, 147)), to(#fff));
+    margin-top: 30px;
+}
+
+.signup__text {
+    margin-top: 8px;
+    height: 15px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.signup__link {
+    text-decoration: none;
+    color: #0066c0;
+}
+
+.gradient__card {
+    display: block;
+    border: none;
+    color: rgb(107, 99, 99);
+    height: 2px;
+    background: rgb(73, 71, 71);
+    background: -webkit-gradient( radial, 50% 50%, 0, 50% 50%, 150, from(rgb(150, 147, 147)), to(#fff));
     margin-top: 30px;
 }
