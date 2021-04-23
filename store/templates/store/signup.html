@@ -38,7 +38,7 @@
                 <hr class="gradient__card mx-auto">
 
                 <div class="signup__text">Already have an account?
-                    <a href="" class="singup__link">Sign in</a>
+                    <a href="{% url 'login' %}" class="singup__link">Sign in</a>
                 </div>
 
             </div>
@@ -46,4 +46,13 @@
     </div>
 
     <hr class="gradient__hr mx-auto">
+
+    <div class="footer__div p-0 m-0 d-flex">
+        <div class="footer__link d-flex mx-auto">
+            <a href="#" class="condition__link mx-auto">Condition of use</a>
+            <a href="#" class="privacy__link mx-auto">Privacy Note</a>
+            <a href="#" class="help__link mx-auto">Help</a>
+        </div>
+    </div>
+
 {% endblock content %}
