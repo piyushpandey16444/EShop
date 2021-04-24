@@ -17,20 +17,15 @@
                 <form method="POST" action="#">
                     {% csrf_token %}
 
-                    {% comment %} {{ form.as_p }} {% endcomment %}
-                    
-
-
                     <label class="ap_email_label" for="ap_email" style="font-size: 14px;">Email</label>
-                    <span class="ap_email" tabindex="2" autocomplete="email" type="email" maxlength="64" required id="ap_email">{{form.email}}</span>
+                    {{form.email}}
                     
-                    {{form.email.label}}
 
                     <label class="ap_password1_label" for="ap_password1" style="font-size: 14px;">Password</label>
-                    <input class="ap_password1" tabindex="3" autocomplete="off" type="password" maxlength="1024" required id="ap_password1" placeholder="At least 8 characters"/>
-                    
+                    {{form.password1}}
+
                     <label class="ap_password2_label" for="ap_password2" style="font-size: 14px;">Confirm Password</label>
-                    <input class="ap_password2" tabindex="4" autocomplete="off" type="password" maxlength="1024" required id="ap_password2"/>
+                    {{form.password2}}
 
                     <p class="alert__content">
                         We will send you a mail to verify your email.<br>

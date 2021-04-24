@@ -80,6 +80,13 @@
     outline-width: thin;
 }
 
+.ap_password2::placeholder {
+    font-size: smaller;
+    font-weight: 500;
+    color: rgb(117, 117, 117);
+    padding: 8px;
+}
+
 .alert__content {
     margin-top: 8px;
     height: 15px;
