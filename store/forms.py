@@ -11,8 +11,8 @@ class UserAdminCreationForm(UserCreationForm):
         'class': 'ap_email',
         'tabindex': 1,
         'autocomplete':
-        'email', 'id':
-        'ap_email'
+            'email', 'id':
+            'ap_email'
     }))
 
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
