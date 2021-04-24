@@ -31,8 +31,15 @@
                         We will send you a mail to verify your email.<br>
                         click on the button to verify account.
                     </p>
-
+                        
                     <input type="submit" id="continue" tabindex="5" class="a-button-input" value="Continue">
+
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <p class="message__content">{{msg}}</p> 
+                        {% endfor %}
+                    {% endif %}
+
                 </form> 
 
                 <hr class="gradient__card mx-auto">

@@ -32,8 +32,21 @@
 
                 <hr class="gradient__card mx-auto">
 
-                <div class="signup__text">New to Eshop?
-                    <a href="{% url 'signup' %}" class="singup__link">Sign Up</a>
+                <div class="info__div">
+                    <div class="signup__text">New to Eshop?
+                        <a href="{% url 'signup' %}" class="singup__link">Sign Up</a>
+                    </div>
+                    
+                    <div class="reset_pwd mt-2">
+                        <a class="help_text" data-toggle="collapse" href="#pwd_reset" role="button" aria-expanded="false" aria-controls="pwd_reset">
+                            Need help?
+                        </a>
+                    </div>
+                    
+                    <div class="collapse" id="pwd_reset">
+                        <a class="help_link" href="#">Forgot Password</a><br>
+                        <a class="help_link" href="#">Other issues with Sign-In</a>
+                    </div>
                 </div>
 
             </div>

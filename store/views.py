@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
-from .models import Product, Category
+from .models import Product, Category, CustomUser
 from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from .serializers import ProductSerializer, CategorySerializer
@@ -7,6 +7,10 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from .forms import UserAdminCreationForm, AuthenticateForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import EmailMessage
 
 
 def compute_order(get_category=None, get_filter=None):
@@ -53,9 +57,30 @@ def signup_view(request):
     if request.method == 'POST':
         form = UserAdminCreationForm(request.POST)
         if form.is_valid():
+            # here we can make is_active to false and make it true after email authentication
             form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Account is created, please verify your email.')
             return redirect('/signup/')
     return render(request, 'store/signup.html', {'form': form})
+
+
+@receiver(post_save, sender=CustomUser)
+def default_to_non_active(sender, instance, created, *args, **kwargs):
+    if created:
+        instance.is_active = False
+        instance.save()
+        email_body = "Test Body"
+        email_subject = "Activate your account."
+        from_email = "mp_reply@botmail.com"
+        to_email = [instance.email]
+        email = EmailMessage(
+            email_subject,
+            email_body,
+            from_email,
+            to_email,
+        )
+        email.send(fail_silently=False)
 
 
 def login_view(request):
