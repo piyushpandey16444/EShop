@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from .models import Product, Category
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from .serializers import ProductSerializer, CategorySerializer
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from .forms import UserAdminCreationForm, AuthenticateForm
+from django.contrib.auth import authenticate, login, logout
 
 
 def compute_order(get_category=None, get_filter=None):
@@ -59,4 +60,16 @@ def signup_view(request):
 
 def login_view(request):
     form = AuthenticateForm()
+    if request.method == "POST":
+        auth_form = AuthenticateForm(request=request, data=request.POST)
+        if auth_form.is_valid():
+            email = auth_form.cleaned_data.get('username')
+            password = auth_form.cleaned_data.get('password')
+            user = authenticate(username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect('/login/')
+
     return render(request, 'store/login.html', {'form': form})

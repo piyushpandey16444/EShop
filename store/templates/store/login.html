@@ -15,7 +15,7 @@
                 <h3 class="card-title">Create Account</h3>
                 
                 <form method="POST" action="#">
-
+                    {% csrf_token %}
                     <label class="ap_email_label" for="ap_email" class="p-0 m-0" style="font-size: 14px;">Email</label>
                     {{form.username}}
 
