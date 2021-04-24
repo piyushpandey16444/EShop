@@ -23,3 +23,11 @@
     text-decoration: none;
     margin-left: 20px;
 }
+
+.message__content {
+    margin-top: 5px;
+    height: 15px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -14,11 +14,10 @@
             <div class="card-body">
                 <h3 class="card-title">Create Account</h3>
                 
-                <form method="POST" action="#">
+                <form method="POST" action="#" novalidate>
                     {% csrf_token %}
-                    <label class="ap_email_label" for="ap_email" class="p-0 m-0" style="font-size: 14px;">Email</label>
+                    <label class="ap_email_label p-0 m-0" for="ap_email" style="font-size: 14px;">Email</label>
                     {{form.username}}
-
                     
                     <label class="ap_password1_label" for="ap_password1" style="font-size: 14px;">Password</label>
                     {{form.password}}
@@ -28,6 +27,14 @@
                     </p>
 
                     <input type="submit" id="continue" tabindex="3" class="a-button-input" value="Continue">
+
+                    <div class="message">
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <p class="message__content">{{msg}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </form> 
 
                 <hr class="gradient__card mx-auto">

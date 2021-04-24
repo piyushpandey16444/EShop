@@ -52,8 +52,7 @@ class AuthenticateForm(AuthenticationForm):
         'autocomplete': 'current-password',
         "class": "ap_password1",
         "tabindex": 2,
-        "autocomplete": "off",
         "maxlength": 1024,
         "id": "ap_password1",
-        "placeholder": "At least 8 characters"
+        "placeholder": "At least 8 characters",
     }))
