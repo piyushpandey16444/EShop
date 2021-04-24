@@ -12,6 +12,17 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from .utils import token_generator
+import threading
+
+
+class EmailThread(threading.Thread):
+
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send(fail_silently=False)
 
 
 def compute_order(get_category=None, get_filter=None):
@@ -53,29 +64,6 @@ def home_view(request):
         return render(request, 'store/home.html', context)
 
 
-def sending_activation_email(request, form):
-    uid64 = urlsafe_base64_encode(force_bytes(form.instance.pk))
-    domain = get_current_site(request).domain
-    link = reverse('activate', kwargs={
-        "uid64": uid64,
-        "token": token_generator.make_token(form.instance),
-    })
-    activate_url = f'http://{domain}{link}'
-
-    email_body = f"Hi {form.instance.email}, \nPlease use this link to verify your account.\n {activate_url}"
-    email_subject = "Activate your account."
-    from_email = "mp_reply@botmail.com"
-    to_email = [form.instance.email]
-    email = EmailMessage(
-        email_subject,
-        email_body,
-        from_email,
-        to_email,
-    )
-    email.send(fail_silently=False)
-    return True
-
-
 def signup_view(request):
     form = UserAdminCreationForm()
     if request.method == 'POST':
@@ -88,19 +76,36 @@ def signup_view(request):
             return redirect('signup')
         if form.is_valid():
             form.save()
-            mail_sent = sending_activation_email(request, form)
-            if mail_sent:
-                messages.success(request, 'Account is created, please verify your email.')
-                return redirect('/signup/')
+            uid64 = urlsafe_base64_encode(force_bytes(form.instance.pk))
+            domain = get_current_site(request).domain
+            link = reverse('activate', kwargs={
+                "uid64": uid64,
+                "token": token_generator.make_token(form.instance),
+            })
+            activate_url = f'http://{domain}{link}'
+
+            email_body = f"Hi {form.instance.email}, \nPlease use this link to verify your account.\n {activate_url}"
+            email_subject = "Activate your account."
+            from_email = "mp_reply@botmail.com"
+            to_email = [form.instance.email]
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                from_email,
+                to_email,
+            )
+            EmailThread(email).start()
+            messages.success(request, 'Account is created, please verify your email.')
+            return redirect('/signup/')
         else:
             for msg in form.errors.as_data():
-                if msg == 'email':
-                    messages.error(request, f"Declared email: {email} is not valid")
                 if msg == 'password2' and password1 == password2:
                     messages.error(request, f"Selected password is not strong enough")
                 elif msg == 'password2' and password1 != password2:
                     messages.error(request,
                                    f"Password and Confirmation Password do not match")
+                if msg == 'email':
+                    messages.error(request, f"Declared email: {email} is not valid")
             return redirect('signup')
     return render(request, 'store/signup.html', {'form': form})
 

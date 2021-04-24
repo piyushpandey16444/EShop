@@ -13,6 +13,15 @@
         <div class="card mx-auto" style="width: 25rem;">
             <div class="card-body">
                 <h3 class="card-title">Create Account</h3>
+
+
+                {% if messages %}
+                    <div class="message alert alert-custom mb-4">
+                        {% for msg in messages %}
+                            <p class="message__content p-0">{{msg}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 
                 <form method="POST" action="#" novalidate>
                     {% csrf_token %}
@@ -28,14 +37,7 @@
 
                     <input type="submit" id="continue" tabindex="3" class="a-button-input" value="Continue">
 
-                    <div class="message">
-                        {% if messages %}
-                            {% for msg in messages %}
-                                <p class="message__content">{{msg}}</p>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                </form> 
+                </form>
 
                 <hr class="gradient__card mx-auto">
 

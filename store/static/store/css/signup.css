@@ -27,6 +27,15 @@
     outline-width: thin;
 }
 
+.show_password{
+    margin-left:265px;
+    cursor: pointer;
+}
+
+.show_password2{
+    margin-left:207px;
+}
+
 .ap_password1_label {
     font-size: 8px;
     margin: 0px;
