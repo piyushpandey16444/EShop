@@ -53,7 +53,7 @@ def signup_view(request):
         form = UserAdminCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('register')
+            return redirect('/signup/')
     return render(request, 'store/signup.html', {'form': form})
 
 
