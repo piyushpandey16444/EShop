@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 
 
@@ -36,3 +36,24 @@ class UserAdminCreationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['email']
+
+
+class AuthenticateForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.EmailInput(attrs={
+        'autofocus': True,
+        "class": "ap_email",
+        "tabindex": 1,
+        "autocomplete": "email",
+        "maxlength": 64,
+        "id": "ap_email",
+    }))
+
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'autocomplete': 'current-password',
+        "class": "ap_password1",
+        "tabindex": 2,
+        "autocomplete": "off",
+        "maxlength": 1024,
+        "id": "ap_password1",
+        "placeholder": "At least 8 characters"
+    }))

@@ -5,7 +5,7 @@ from django.core import serializers
 from .serializers import ProductSerializer, CategorySerializer
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-from .forms import UserAdminCreationForm
+from .forms import UserAdminCreationForm, AuthenticateForm
 
 
 def compute_order(get_category=None, get_filter=None):
@@ -58,4 +58,5 @@ def signup_view(request):
 
 
 def login_view(request):
-    return render(request, 'store/login.html')
+    form = AuthenticateForm()
+    return render(request, 'store/login.html', {'form': form})
