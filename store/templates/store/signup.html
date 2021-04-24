@@ -14,10 +14,18 @@
             <div class="card-body">
                 <h3 class="card-title">Create Account</h3>
                 
-                <form>
-                    <label class="ap_email_label" for="ap_email" style="font-size: 14px;">Email</label>
-                    <input class="ap_email" tabindex="2" autocomplete="email" type="email" maxlength="64" required id="ap_email"/>
+                <form method="POST" action="#">
+                    {% csrf_token %}
+
+                    {% comment %} {{ form.as_p }} {% endcomment %}
                     
+
+
+                    <label class="ap_email_label" for="ap_email" style="font-size: 14px;">Email</label>
+                    <span class="ap_email" tabindex="2" autocomplete="email" type="email" maxlength="64" required id="ap_email">{{form.email}}</span>
+                    
+                    {{form.email.label}}
+
                     <label class="ap_password1_label" for="ap_password1" style="font-size: 14px;">Password</label>
                     <input class="ap_password1" tabindex="3" autocomplete="off" type="password" maxlength="1024" required id="ap_password1" placeholder="At least 8 characters"/>
                     
@@ -51,11 +59,5 @@
             <a href="#" class="help__link mx-auto">Help</a>            
         </div>
     </div>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
 
 {% endblock content %}
