@@ -15,9 +15,6 @@
                 <h3 class="card-title">Create Account</h3>
                 
                 <form>
-                    <label class="ap_customer_uname_label" for="ap_customer_uname" class="p-0 m-0" style="font-size: 14px;">Your Username</label>
-                    <input class="ap_customer_uname" tabindex="1" autocomplete="username" type="text" maxlength="50" required id="ap_customer_uname"/>
-                    
                     <label class="ap_email_label" for="ap_email" style="font-size: 14px;">Email</label>
                     <input class="ap_email" tabindex="2" autocomplete="email" type="email" maxlength="64" required id="ap_email"/>
                     
@@ -54,5 +51,11 @@
             <a href="#" class="help__link mx-auto">Help</a>            
         </div>
     </div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
 
 {% endblock content %}

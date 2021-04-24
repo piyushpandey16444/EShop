@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from .models import Product, Category
 from django.http import JsonResponse
 from django.core import serializers
 from .serializers import ProductSerializer, CategorySerializer
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from .forms import UserAdminCreationForm
 
 
 def compute_order(get_category=None, get_filter=None):
@@ -47,7 +48,13 @@ def home_view(request):
 
 
 def signup_view(request):
-    return render(request, 'store/signup.html')
+    form = UserAdminCreationForm()
+    if request.method == 'POST':
+        form = UserAdminCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('register')
+    return render(request, 'store/signup.html', {'form': form})
 
 
 def login_view(request):
