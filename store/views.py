@@ -12,6 +12,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import EmailMessage
 
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from .utils import token_generator
+
 
 def compute_order(get_category=None, get_filter=None):
     if get_filter == 'l2h':
@@ -59,9 +65,36 @@ def signup_view(request):
         if form.is_valid():
             # here we can make is_active to false and make it true after email authentication
             form.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Account is created, please verify your email.')
-            return redirect('/signup/')
+
+            # path to view
+            # required domain
+            # relative url for verification
+            # encode uid
+            # token
+
+            uid64 = urlsafe_base64_encode(force_bytes(form.instance.pk))
+            domain = get_current_site(request).domain
+            link = reverse('activate', kwargs={
+                "uid64": uid64,
+                "token": token_generator.make_token(form),
+            })
+            activate_url = f'http://{domain}{link}'
+
+            email_body = f"Hi {form.instance.email}, \nPlease use this link to verify your account.\n {activate_url}"
+            email_subject = "Activate your account."
+            from_email = "mp_reply@botmail.com"
+            to_email = [form.instance.email]
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                from_email,
+                to_email,
+            )
+            email.send(fail_silently=False)
+
+        messages.add_message(request, messages.SUCCESS,
+                             'Account is created, please verify your email.')
+        return redirect('/signup/')
     return render(request, 'store/signup.html', {'form': form})
 
 
@@ -70,17 +103,6 @@ def default_to_non_active(sender, instance, created, *args, **kwargs):
     if created:
         instance.is_active = False
         instance.save()
-        email_body = "Test Body"
-        email_subject = "Activate your account."
-        from_email = "mp_reply@botmail.com"
-        to_email = [instance.email]
-        email = EmailMessage(
-            email_subject,
-            email_body,
-            from_email,
-            to_email,
-        )
-        email.send(fail_silently=False)
 
 
 def login_view(request):
@@ -98,3 +120,7 @@ def login_view(request):
             return HttpResponseRedirect('/login/')
 
     return render(request, 'store/login.html', {'form': form})
+
+
+def verification_view(request, uid64, token=None):
+    return HttpResponseRedirect('/login/')
