@@ -1,18 +1,18 @@
-from django.shortcuts import render, redirect
-from .models import Product, Category, CustomUser
-from django.http import JsonResponse, HttpResponseRedirect
-from .forms import UserAdminCreationForm, AuthenticateForm
-from django.contrib.auth import authenticate, login, logout
+import threading
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.mail import EmailMessage
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.contrib.sites.shortcuts import get_current_site
-from django.urls import reverse
+from .forms import UserAdminCreationForm, AuthenticateForm
+from .models import Product, Category, CustomUser
 from .utils import token_generator
-import threading
 
 
 class EmailThread(threading.Thread):
@@ -66,7 +66,14 @@ def home_view(request):
 
 def signup_view(request):
     form = UserAdminCreationForm()
-    if request.method == 'POST':
+    if request.method == "GET":
+        return render(request, 'store/signup.html', {'form': form})
+
+    elif request.method == 'POST':
+        """
+        takes data from user, validate it and send an activation mail if everything is fine.
+        else returns the error to the user.
+        """
         form = UserAdminCreationForm(request.POST)
         password1 = form.data['password1']
         password2 = form.data['password2']
@@ -107,7 +114,6 @@ def signup_view(request):
                 if msg == 'email':
                     messages.error(request, f"Declared email: {email} is not valid")
             return redirect('signup')
-    return render(request, 'store/signup.html', {'form': form})
 
 
 @receiver(post_save, sender=CustomUser)
@@ -115,11 +121,16 @@ def default_to_non_active(instance, created, **kwargs):
     if created:
         instance.is_active = False
         instance.save()
+    elif kwargs:
+        pass
 
 
 def login_view(request):
     form = AuthenticateForm()
-    if request.method == "POST":
+    if request.method == "GET":
+        return render(request, 'store/login.html', {'form': form})
+
+    elif request.method == "POST":
         email = request.POST.get('username')
         password = request.POST.get('password')
         if email and password:
@@ -134,7 +145,6 @@ def login_view(request):
             return redirect('login')
         messages.success(request, 'Please provide both the fields.')
         return redirect('login')
-    return render(request, 'store/login.html', {'form': form})
 
 
 def verification_view(request, uid64, token):
