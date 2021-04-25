@@ -12,7 +12,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from .forms import UserAdminCreationForm, AuthenticateForm
 from .models import Product, Category, CustomUser
-from .utils import token_generator, PasswordResetTokenGenerator
+from .utils import token_generator
 
 
 class EmailThread(threading.Thread):
@@ -102,17 +102,20 @@ def signup_view(request):
                 to_email,
             )
             EmailThread(email).start()
-            messages.success(request, 'Account is created, please verify your email.')
+            messages.success(
+                request, 'Account is created, please verify your email.')
             return redirect('/signup/')
         else:
             for msg in form.errors.as_data():
                 if msg == 'password2' and password1 == password2:
-                    messages.error(request, f"Selected password is not strong enough")
+                    messages.error(
+                        request, f"Selected password is not strong enough")
                 elif msg == 'password2' and password1 != password2:
                     messages.error(request,
                                    f"Password and Confirmation Password do not match")
                 if msg == 'email':
-                    messages.error(request, f"Declared email: {email} is not valid")
+                    messages.error(
+                        request, f"Declared email: {email} is not valid")
             return redirect('signup')
 
 
@@ -139,9 +142,11 @@ def login_view(request):
                 if user.is_active:
                     login(request, user)
                     return HttpResponseRedirect('/')
-                messages.success(request, 'Account is not active, please check your email.')
+                messages.success(
+                    request, 'Account is not active, please check your email.')
                 return redirect('login')
-            messages.error(request, 'Invalid credentials or account is not active, please check your email.')
+            messages.error(
+                request, 'Invalid credentials or account is not active, please check your email.')
             return redirect('login')
         messages.success(request, 'Please provide both the fields.')
         return redirect('login')
